@@ -17,7 +17,7 @@ public class Game extends MouseAdapter {
     private static boolean gameOver = false;
     private static boolean playerWon = false;
 
-    Board board = new Board();
+    static Board board = new Board();
 
     public Game(Board board) {
         this.board = board;
@@ -155,5 +155,32 @@ public class Game extends MouseAdapter {
 
         }
     }
-    
+
+    public static void resetGame(){
+        gameOver = false;
+        playerWon = false;
+        firstClick = true;
+        Board.gamingBoard = new char[]{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' '};
+        Board.board = new char[]{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' '};
+        board.repaint();
+    }
+
 }
