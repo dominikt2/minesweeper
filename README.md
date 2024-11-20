@@ -16,3 +16,4 @@ Game result is printed in terminal. </br>
   - Left click to reveal a tile
   - Right click to flag/unflag a tile
   - Reveal every tile except bombs to win
+  - To reste the game click on the 'reset' button
