@@ -7,9 +7,8 @@
   
 Minesweeper game made fully in java.
 
-For now board is a 10 x 10 grid. </br>
+For now board is a 10 x 10 grid and contains 10 bombs. </br>
 
-Board contains 10 mines. </br>
 
 Game result is printed in terminal. </br>
 
