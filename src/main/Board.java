@@ -36,24 +36,20 @@ public class Board extends JPanel{
 
     public Board(){
         this.setPreferredSize(new Dimension(cols * tileSize, rows * tileSize));
+        loadSpriteSheet();
+
+    }
+    BufferedImage sheet;
+    protected int sheetScale;
+
+    private void loadSpriteSheet() {
         try {
-            sheet = ImageIO.read(getClass().getClassLoader().getResourceAsStream("main/res/tileimage.png"));
+            sheet = ImageIO.read(getClass().getResourceAsStream("/main/resources/tileimage.png"));
             sheetScale = sheet.getWidth() / 12;
-        } catch (IOException | NullPointerException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Nie można załadować obrazu: main/res/tileimage.png");
-        }
-    }
-    BufferedImage sheet;{
-
-        try{
-            sheet = ImageIO.read(ClassLoader.getSystemResourceAsStream("tileimage.png"));
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-    protected int sheetScale = sheet.getWidth()/12;
 
     Image sprite;
 
