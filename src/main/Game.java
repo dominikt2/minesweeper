@@ -154,15 +154,6 @@ public class Game extends MouseAdapter {
             board[i] = (char) (count + '0');
 
         }
-        print(board);
     }
-    public static void print(char[] board){
-        for(int i=0; i<board.length; i++){
-            if(i % 10 == 0){
-                System.out.println();
-            }
-            System.out.print(board[i] + " ");
-        }
-    }
-
+    
 }
