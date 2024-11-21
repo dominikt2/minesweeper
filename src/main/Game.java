@@ -30,39 +30,47 @@ public class Game extends MouseAdapter {
     public void mousePressed(MouseEvent e) {
         tileCol = e.getX() / board.tileSize;
         tileRow = e.getY() / board.tileSize;
-
         tileIndex = tileRow * Main.boardSize + tileCol;
 
-
         if (!gameOver) {
-            if(playerWon()){
-                playerWon = true;
-                gameOver = true;
-            }
             if (e.getButton() == MouseEvent.BUTTON1) {
-                if(firstClick){
+                if (firstClick) {
                     placeBombs(Board.gamingBoard, tileIndex);
                     firstClick = false;
                 }
-                if(board.board[tileIndex] == 'F'){
+                if (board.board[tileIndex] == 'F') {
                     return;
                 }
                 redrawBoard(tileRow, tileCol);
+
+
+                if (Board.board[tileIndex] == 'B') {
+                    gameOver = true;
+                    System.out.println("You lost!");
+                    printBombs();
+                } else if (playerWon()) {
+                    gameOver = true;
+                    playerWon = true;
+                    System.out.println("You won!");
+                }
             } else if (e.getButton() == MouseEvent.BUTTON3) {
-                if(board.board[tileIndex] == 'F'){
+                if (board.board[tileIndex] == 'F') {
                     board.board[tileIndex] = '\0';
-                }else if(board.board[tileIndex] == '\0'){
+                } else if (board.board[tileIndex] == '\0') {
                     board.board[tileIndex] = 'F';
                 }
             }
-        } else {
-            if (playerWon) {
-                System.out.println("You won!");
-            } else {
-                System.out.println("You lost!");
-            }
         }
 
+        board.repaint();
+    }
+
+    public static void printBombs(){
+        for(int i=0; i<Board.board.length; i++){
+            if(Board.gamingBoard[i] == 'B'){
+                Board.board[i] = 'B';
+            }
+        }
         board.repaint();
     }
 
