@@ -9,30 +9,12 @@ public class Board extends JPanel{
 
     Game game;
     public int tileSize = 40;
-    int cols = 10;
-    int rows = 10;
+    static int cols = 10;
+    static int rows = 10;
 
-    static char[] board = {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-                            ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-                            ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-                            ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-                            ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-                            ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-                            ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-                            ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-                            ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-                            ' ',' ',' ',' ',' ',' ',' ',' ',' ',' '};
+    static char[] board = new char[Main.boardSize*Main.boardSize];
 
-    static char[] gamingBoard = {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-                                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-                                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-                                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-                                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-                                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-                                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-                                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-                                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-                                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' '};
+    static char[] gamingBoard = new char[Main.boardSize*Main.boardSize];
 
     public Board(){
         this.setPreferredSize(new Dimension(cols * tileSize, rows * tileSize));
@@ -60,7 +42,7 @@ public class Board extends JPanel{
         for(int r=0; r<rows; r++){
             for(int c=0; c<cols; c++) {
                 char tileType = board[r * cols + c];
-                if(tileType == ' '){
+                if(tileType == '\0'){
                     sprite = sheet.getSubimage(0, 0, tileSize, tileSize);
                     g2d.drawImage(sprite, c * tileSize, r * tileSize, null);
                 }else if(tileType == '0' || tileType == 'E'){
