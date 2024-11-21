@@ -5,9 +5,14 @@
   - clone repository
   - run Main.java in src/main/Main.java </br>
   
-Minesweeper game made fully in java.
 
-For now board is a 10 x 10 grid and contains 10 bombs. </br>
+For now game has 3 game difficulties:
+  - 10 x 10 grid with 10 bombs
+  - 16 x 16 grid with 40 bombs
+  - 20 x 20 grid with 75 bombs
+
+Difficulty can be change by selecting it ftom the options menu. </br>
+You can reset the game with the "RESET" button.
 
 
 Game result is printed in terminal. </br>
@@ -16,4 +21,3 @@ Game result is printed in terminal. </br>
   - Left click to reveal a tile
   - Right click to flag/unflag a tile
   - Reveal every tile except bombs to win
-  - To reset the game click on the 'reset' button
