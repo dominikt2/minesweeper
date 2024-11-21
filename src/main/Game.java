@@ -10,6 +10,8 @@ public class Game extends MouseAdapter {
     public static int tileRow;
     public static int tileIndex;
 
+    public static int bombs;
+
     private static boolean firstClick = true;
 
     public static boolean placeFlag = false;
@@ -29,7 +31,7 @@ public class Game extends MouseAdapter {
         tileCol = e.getX() / board.tileSize;
         tileRow = e.getY() / board.tileSize;
 
-        tileIndex = tileRow * 10 + tileCol;
+        tileIndex = tileRow * Main.boardSize + tileCol;
 
 
         if (!gameOver) {
@@ -48,8 +50,8 @@ public class Game extends MouseAdapter {
                 redrawBoard(tileRow, tileCol);
             } else if (e.getButton() == MouseEvent.BUTTON3) {
                 if(board.board[tileIndex] == 'F'){
-                    board.board[tileIndex] = ' ';
-                }else if(board.board[tileIndex] == ' '){
+                    board.board[tileIndex] = '\0';
+                }else if(board.board[tileIndex] == '\0'){
                     board.board[tileIndex] = 'F';
                 }
             }
@@ -60,14 +62,14 @@ public class Game extends MouseAdapter {
                 System.out.println("You lost!");
             }
         }
-        
+
         board.repaint();
     }
 
     public static boolean playerWon(){
         int count = 0;
         for(int i=0; i<Board.board.length; i++){
-            if(Board.board[i] != 'B' && Board.board[i] != ' '){
+            if(Board.board[i] != 'B' && Board.board[i] != '\0'){
                 count++;
             }
         }
@@ -79,7 +81,7 @@ public class Game extends MouseAdapter {
 
 
     public void redrawBoard(int tileRow, int tileCol){
-        int tileIndex = tileRow * 10 + tileCol;
+        int tileIndex = tileRow * Main.boardSize + tileCol;
         if(Board.gamingBoard[tileIndex] =='0'){
             floodFill(tileRow, tileCol);
         }
@@ -90,9 +92,9 @@ public class Game extends MouseAdapter {
     }
 
     public void floodFill(int tileRow, int tileCol) {
-        int tileIndex = tileRow * 10 + tileCol;
-        int width = 10;
-        int height = 10;
+        int tileIndex = tileRow * Main.boardSize + tileCol;
+        int width = Main.boardSize;
+        int height = Main.boardSize;
 
         if (tileRow < 0 || tileCol < 0 || tileRow >= height || tileCol >= width || Board.gamingBoard[tileIndex] == 'B' || Board.board[tileIndex] == 'E') {
             return;
@@ -112,11 +114,10 @@ public class Game extends MouseAdapter {
         floodFill(tileRow, tileCol + 1);
     }
     public static void placeBombs(char[] board, int tileIndex) {
-        int bombs = 10;
         Set<Integer> bombPositions = new HashSet<>();
 
         while (bombPositions.size() < bombs) {
-            int random = (int) (Math.random() * 100);
+            int random = (int) (Math.random() * Main.boardSize * Main.boardSize);
             if (random != tileIndex && !bombPositions.contains(random)) {
                 bombPositions.add(random);
             }
@@ -134,7 +135,7 @@ public class Game extends MouseAdapter {
             if (board[i] == 'B') continue;
 
             int count = 0;
-            int width = 10;
+            int width = Main.boardSize;
 
             if (i >= width) {
                 if (i % width != 0 && board[i - width - 1] == 'B') count++;
@@ -160,26 +161,9 @@ public class Game extends MouseAdapter {
         gameOver = false;
         playerWon = false;
         firstClick = true;
-        Board.gamingBoard = new char[]{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' '};
-        Board.board = new char[]{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-                ' ',' ',' ',' ',' ',' ',' ',' ',' ',' '};
+        Board.gamingBoard = new char[Main.boardSize*Main.boardSize];
+        Board.board = new char[Main.boardSize*Main.boardSize];
+        Main.setWindowSize();
         board.repaint();
     }
 
