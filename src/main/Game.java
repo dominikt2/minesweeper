@@ -81,7 +81,11 @@ public class Game extends MouseAdapter {
                 count++;
             }
         }
-        if(count == 99){
+        if(Main.boardSize == 10 && count == 90){
+            return true;
+        }else if(Main.boardSize == 16 && count == 216) {
+            return true;
+        }else if(Main.boardSize == 20 && count == 350){
             return true;
         }
         return false;
